@@ -1,0 +1,526 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Teachers' Day | Sir Randy Bello</title>
+
+<style>
+:root {
+  --bg: #071426;
+  --card: #102b4c;
+  --text: #edf7ff;
+  --accent: #54baff;
+  --paper: #f8fcff;
+  --paper-text: #183451;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  color: var(--text);
+  background: radial-gradient(circle at top, #164b82, var(--bg) 65%);
+  overflow-x: hidden;
+  transition: background 0.8s, color 0.8s;
+}
+
+body.light {
+  --bg: #dcefff;
+  --card: #ffffff;
+  --text: #163c65;
+  --accent: #087ed0;
+  background: linear-gradient(135deg, #eaf6ff, #b8ddff, #f9fcff);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+}
+
+.brand {
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+
+.theme-btn, .music-btn {
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  padding: 10px 15px;
+  border-radius: 25px;
+  transition: 0.3s;
+}
+
+.theme-btn:hover, .music-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 15px var(--accent);
+}
+
+main {
+  max-width: 850px;
+  padding: 25px 18px 60px;
+  margin: auto;
+  text-align: center;
+}
+
+.badge {
+  display: inline-block;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 30px;
+  padding: 8px 18px;
+  margin-bottom: 20px;
+  animation: fadeDown 1s ease both;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 7vw, 4.2rem);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  animation: fadeUp 1s ease both;
+}
+
+h1 span {
+  color: var(--accent);
+  text-shadow: 0 0 22px #299cff88;
+}
+
+.subtitle {
+  line-height: 1.8;
+  opacity: 0.9;
+  margin-bottom: 30px;
+  animation: fadeUp 1.2s ease both;
+}
+
+.heart {
+  display: inline-block;
+  color: #66bdff;
+  font-size: 45px;
+  filter: drop-shadow(0 0 12px #48aaff);
+  animation: heartbeat 1.5s infinite;
+  margin: 10px;
+}
+
+.envelope-area {
+  perspective: 1000px;
+  margin: 35px auto;
+  max-width: 470px;
+}
+
+.envelope {
+  position: relative;
+  height: 250px;
+  background: linear-gradient(145deg, #1e72b9, #092e58);
+  border: 1px solid #72c7ff;
+  border-radius: 12px;
+  box-shadow: 0 20px 55px #0005, 0 0 25px #329fff44;
+  overflow: hidden;
+}
+
+.envelope:before {
+  content: "💙";
+  position: absolute;
+  z-index: 2;
+  font-size: 44px;
+  left: 50%;
+  top: 48%;
+  transform: translate(-50%, -50%);
+  animation: heartbeat 1.5s infinite;
+}
+
+.envelope:after {
+  content: "A LETTER FOR SIR RANDY";
+  position: absolute;
+  bottom: 25px;
+  left: 0;
+  right: 0;
+  font-size: 13px;
+  letter-spacing: 3px;
+  color: white;
+}
+
+.flap {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #61baff, #16558e);
+  clip-path: polygon(0 0, 100% 0, 50% 63%);
+  transform-origin: top;
+  transition: transform 1s ease;
+  z-index: 1;
+}
+
+.envelope.open .flap {
+  transform: rotateX(180deg);
+}
+
+.open-btn {
+  margin-top: 22px;
+  border: none;
+  border-radius: 30px;
+  padding: 14px 28px;
+  color: #05213e;
+  font-size: 16px;
+  font-weight: bold;
+  background: linear-gradient(100deg, #9bdbff, #ffffff, #5eb8ff);
+  background-size: 200% auto;
+  box-shadow: 0 0 20px #51aaff66;
+  transition: 0.4s;
+  animation: shimmer 3s linear infinite;
+}
+
+.open-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 30px #54baff;
+}
+
+.letter {
+  text-align: left;
+  background: var(--paper);
+  color: var(--paper-text);
+  border: 2px solid #9bd8ff;
+  border-radius: 18px;
+  padding: clamp(22px, 5vw, 45px);
+  margin: 35px auto;
+  line-height: 1.9;
+  box-shadow: 0 0 35px #40aaff30;
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transform: translateY(35px) scale(0.97);
+  transition: opacity 1s, transform 1s, max-height 1.5s;
+}
+
+.letter.show {
+  opacity: 1;
+  max-height: 1400px;
+  transform: translateY(0) scale(1);
+}
+
+.letter h2 {
+  color: #167dc5;
+  text-align: center;
+  margin-bottom: 22px;
+  font-size: 1.8rem;
+}
+
+.letter p {
+  margin-bottom: 16px;
+}
+
+.signature {
+  margin-top: 25px;
+  font-weight: bold;
+  color: #167dc5;
+}
+
+.sparkle {
+  position: fixed;
+  top: -20px;
+  z-index: 10;
+  pointer-events: none;
+  color: #9bdcff;
+  text-shadow: 0 0 12px #fff, 0 0 20px #42aaff;
+  animation: fall linear forwards;
+}
+
+footer {
+  text-align: center;
+  padding: 25px 15px;
+  font-size: 13px;
+  opacity: 0.8;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.2); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.12); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(25px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  to { background-position: 200% center; }
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar { padding: 15px 12px; }
+  .brand { font-size: 13px; }
+  .theme-btn { padding: 9px 11px; font-size: 12px; }
+  .envelope { height: 210px; }
+  .letter { line-height: 1.8; }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+  <div class="brand">💙 BLUE HEARTS</div>
+  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()">
+    ☀️ Light Mode
+  </button>
+</header>
+
+<main>
+  <div class="badge">✨ A SPECIAL TRIBUTE ✨</div>
+
+  <h1>Happy Teachers'<br><span>Day!</span></h1>
+
+  <p class="subtitle">
+    A little letter filled with gratitude, respect, and appreciation<br>
+    for our amazing Web Development Instructor.
+  </p>
+
+  <div class="heart">💙</div>
+
+  <h2>Dear Sir Randy Bello</h2>
+
+  <p class="subtitle">
+    Thank you for sharing your knowledge and inspiring us to learn.
+    This little surprise is made especially for you!
+  </p>
+
+  <div class="envelope-area">
+    <div class="envelope" id="envelope">
+      <div class="flap"></div>
+    </div>
+
+    <button class="open-btn" id="openBtn" onclick="openLetter()">
+      💌 Open Your Letter
+    </button>
+  </div>
+
+  <article class="letter" id="letter">
+    <h2>💙 A Letter of Appreciation 💙</h2>
+
+    <p>Dear Sir Randy Bello,</p>
+
+    <p>
+      Happy Teachers' Day, Sir Randy! Thank you for being a wonderful
+      Web Development Instructor and for sharing your knowledge,
+      skills, and experience with us.
+    </p>
+
+    <p>
+      Thank you for your patience in teaching us HTML, CSS, JavaScript,
+      and the importance of creating meaningful and creative websites.
+      Your guidance helps us understand our lessons and motivates us
+      to improve our skills as students.
+    </p>
+
+    <p>
+      I truly appreciate the time and effort you give to help us learn.
+      Whenever coding becomes challenging, your lessons remind us
+      to keep practicing, be patient, and never give up.
+    </p>
+
+    <p>
+      May you continue to inspire more students, share your talents,
+      and make a positive difference in their lives. You deserve
+      appreciation not only today but every day.
+    </p>
+
+    <p>
+      Thank you for being our teacher, guide, and inspiration.
+      Your dedication will always be appreciated. 💙
+    </p>
+
+    <p>With gratitude and respect,</p>
+
+    <p class="signature">
+      Sincerely,<br>
+      Abegael Galvan<br>
+      Your Web Development Student 💙
+    </p>
+
+    <p style="text-align:center; font-size:25px; margin-top:25px;">
+      💙 ✨ 💙 ✨ 💙
+    </p>
+  </article>
+
+  <div>
+    <button class="music-btn" onclick="toggleMusic()" id="musicBtn">
+      🎵 Play Celebration Music
+    </button>
+  </div>
+</main>
+
+<footer>
+  Made with 💙, appreciation, and a little sparkle.<br>
+  Happy Teachers' Day, Sir Randy Bello!
+</footer>
+
+<script>
+let isOpen = false;
+let musicPlaying = false;
+let audioContext = null;
+let musicTimer = null;
+let noteIndex = 0;
+
+function toggleTheme() {
+  document.body.classList.toggle("light");
+
+  const isLight = document.body.classList.contains("light");
+  document.getElementById("themeBtn").textContent =
+    isLight ? "🌙 Dark Mode" : "☀️ Light Mode";
+}
+
+function openLetter() {
+  const envelope = document.getElementById("envelope");
+  const letter = document.getElementById("letter");
+  const button = document.getElementById("openBtn");
+
+  isOpen = !isOpen;
+
+  if (isOpen) {
+    envelope.classList.add("open");
+    letter.classList.add("show");
+    button.textContent = "💌 Close Your Letter";
+
+    setTimeout(() => {
+      letter.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 300);
+
+    sparkleBurst();
+  } else {
+    envelope.classList.remove("open");
+    letter.classList.remove("show");
+    button.textContent = "💌 Open Your Letter";
+  }
+}
+
+function createSparkle() {
+  const sparkle = document.createElement("span");
+  sparkle.className = "sparkle";
+
+  const symbols = ["✦", "✧", "✨", "♡", "💙"];
+  sparkle.textContent =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+  sparkle.style.left = Math.random() * 100 + "vw";
+  sparkle.style.fontSize = (12 + Math.random() * 20) + "px";
+  sparkle.style.animationDuration = (3 + Math.random() * 4) + "s";
+
+  document.body.appendChild(sparkle);
+
+  setTimeout(() => sparkle.remove(), 7000);
+}
+
+function sparkleBurst() {
+  for (let i = 0; i < 35; i++) {
+    setTimeout(createSparkle, i * 45);
+  }
+}
+
+// Gentle sparkling background
+setInterval(() => {
+  if (Math.random() > 0.35) createSparkle();
+}, 650);
+
+// Optional original celebration melody using browser audio.
+// No external music file is required.
+function toggleMusic() {
+  const button = document.getElementById("musicBtn");
+
+  if (musicPlaying) {
+    clearInterval(musicTimer);
+    musicPlaying = false;
+
+    if (audioContext) {
+      audioContext.close();
+      audioContext = null;
+    }
+
+    button.textContent = "🎵 Play Celebration Music";
+    return;
+  }
+
+  const AudioContextClass =
+    window.AudioContext || window.webkitAudioContext;
+
+  if (!AudioContextClass) {
+    button.textContent = "Music isn't supported by this browser";
+    return;
+  }
+
+  audioContext = new AudioContextClass();
+
+  const melody = [
+    523.25, 659.25, 783.99, 659.25,
+    587.33, 698.46, 880.00, 698.46,
+    523.25, 659.25, 783.99, 1046.50
+  ];
+
+  musicPlaying = true;
+  button.textContent = "⏸ Stop Celebration Music";
+
+  function playNote() {
+    if (!audioContext || audioContext.state === "closed") return;
+
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+
+    oscillator.type = "sine";
+    oscillator.frequency.value = melody[noteIndex % melody.length];
+
+    gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      0.08, audioContext.currentTime + 0.05
+    );
+    gain.gain.exponentialRampToValueAtTime(
+      0.0001, audioContext.currentTime + 0.38
+    );
+
+    oscillator.connect(gain);
+    gain.connect(audioContext.destination);
+
+    oscillator.start();
+    oscillator.stop(audioContext.currentTime + 0.4);
+
+    noteIndex++;
+  }
+
+  audioContext.resume().then(() => {
+    playNote();
+    musicTimer = setInterval(playNote, 450);
+  });
+}
+</script>
+
+</body>
+</html>
